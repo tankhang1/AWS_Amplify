@@ -1,0 +1,19 @@
+type Card @model @auth(rules: [{allow: public}]) {
+  id: ID!
+  header: String
+  description: String
+  detail: CardDetail @hasOne
+}
+
+enum CardStatus {
+  ACTIVE
+  INACTIVE
+}
+
+type CardDetail @model @auth(rules: [{allow: public}]) {
+  id: ID!
+  question: String
+  answer: [String]
+  status: CardStatus!
+  card: Card @belongsTo
+}
